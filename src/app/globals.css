@@ -5,6 +5,7 @@
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
   --glass-bg: rgba(255, 255, 255, 0.05);
+  /* Fallback */
   --glass-border: rgba(255, 255, 255, 0.1);
   --font-geist-sans: "Geist", sans-serif;
 }
@@ -33,24 +34,27 @@ body {
   padding: 1rem;
 }
 
+/* Logo specific styles */
 .logo-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   position: relative;
-  width: 8rem;
-  /* 32 * 0.25rem = 8rem */
-  height: 8rem;
+  width: 18rem;
+  height: 12rem;
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: 2;
+  /* Ensure logo is above the watermark */
 }
 
 @media (min-width: 768px) {
   .logo-container {
-    width: 10rem;
-    height: 10rem;
+    width: 28rem;
+    height: 18rem;
   }
 }
 
 .logo-image {
   object-fit: contain;
-  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.3));
 }
 
 .footer-text {
@@ -108,32 +112,26 @@ body {
 }
 
 /* Typography */
-h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #fff 0%, #b0b0b0 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0.5rem 0;
-}
-
 p {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Glass Card */
+/* Glass Card with Logo Background */
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
+  /* Remove basic glass background */
+  background: transparent;
+  backdrop-filter: blur(0px);
+  /* Disable default blur to handle custom overlay */
   border: 1px solid var(--glass-border);
   border-radius: 24px;
-  padding: 3rem;
-  max-width: 600px;
+  padding: 4rem 2rem;
+  max-width: 800px;
   width: 90%;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   display: flex;
@@ -141,6 +139,39 @@ p {
   align-items: center;
   text-align: center;
   transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Texture (Logo) */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/logo_new.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.15;
+  /* Subtle watermark layout */
+  z-index: 0;
+}
+
+/* Dark Overlay for readability */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(5, 10, 20, 0.7) 0%, rgba(5, 10, 20, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  /* Apply blur here */
+  z-index: 0;
 }
 
 .glass-card:hover {
@@ -148,18 +179,20 @@ p {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Buttons & Links */
+/* Buttons & Links relative position for z-indexing */
 .social-links {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
+  gap: 2rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .social-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,13 +200,15 @@ p {
   color: white;
   text-decoration: none;
   font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .social-icon:hover {
   background: var(--accent-primary);
   color: #000;
-  box-shadow: 0 0 15px var(--accent-primary);
-  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--accent-primary);
+  transform: scale(1.15);
+  border-color: transparent;
 }
 
 /* Animations */
@@ -204,11 +239,26 @@ p {
 
 /* Responsive */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
+  .glass-card {
+    padding: 2.5rem 1.5rem;
   }
 
-  .glass-card {
-    padding: 2rem;
+  .social-links {
+    gap: 1.25rem;
+  }
+
+  .social-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .glass-card::before {
+    background-size: contain;
+    /* Better for mobile */
+    opacity: 0.2;
   }
 }
