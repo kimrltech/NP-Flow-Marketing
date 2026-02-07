@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
     return (
@@ -13,16 +14,21 @@ export default function Hero() {
 
             <div className="container mx-auto px-6 z-10 text-center">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="mb-8 relative inline-block"
+                    className="mb-12 relative inline-block w-full max-w-4xl"
                 >
-                    <div className="w-full max-w-4xl mx-auto h-48 md:h-80 relative mb-8">
-                        {/* Using the logo as the main visual element but styled nicely */}
-                        <div
-                            className="w-full h-full bg-[url('/assets/logo_new.jpg')] bg-contain bg-center bg-no-repeat drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]"
-                        />
+                    <div className="relative w-full h-56 md:h-96 flex items-center justify-center">
+                        <div className="relative w-full h-full">
+                            <Image
+                                src="/assets/hero_logo.png"
+                                alt="NP Flow Marketing Logo"
+                                fill
+                                className="object-contain object-center drop-shadow-[0_0_30px_rgba(0,210,255,0.3)]"
+                                priority
+                            />
+                        </div>
                     </div>
                 </motion.div>
 
@@ -30,7 +36,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400"
+                    className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400 leading-tight"
                 >
                     Elevating Brands with <br />
                     <span className="text-brand-blue">Data-Driven Strategies</span>
