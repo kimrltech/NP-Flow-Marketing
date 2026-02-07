@@ -1,264 +1,33 @@
-:root {
-  --bg-color: #050a14;
-  --accent-primary: #00d2ff;
-  --accent-secondary: #3a7bd5;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  /* Fallback */
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --font-geist-sans: "Geist", sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  box-sizing: border-box;
+:root {
+  --background: #050a14;
+  --foreground: #ffffff;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
-/* Layout Containers */
-.main-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 1rem;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Logo specific styles */
-.logo-container {
-  margin-bottom: 2rem;
-  position: relative;
-  width: 18rem;
-  height: 12rem;
-  transition: width 0.3s ease, height 0.3s ease;
-  z-index: 2;
-  /* Ensure logo is above the watermark */
+::-webkit-scrollbar-track {
+  background: #050a14;
 }
 
-@media (min-width: 768px) {
-  .logo-container {
-    width: 28rem;
-    height: 18rem;
-  }
+::-webkit-scrollbar-thumb {
+  background: #3a7bd5;
+  border-radius: 4px;
 }
 
-.logo-image {
-  object-fit: contain;
-  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.3));
-}
-
-.footer-text {
-  position: absolute;
-  bottom: 1rem;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-/* Dynamic Background */
-.background-flow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: radial-gradient(circle at 50% 50%, #0d1b2a 0%, #050a14 100%);
-  overflow: hidden;
-}
-
-.flow-shape {
-  position: absolute;
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%);
-  opacity: 0.1;
-  filter: blur(80px);
-  animation: float 20s infinite ease-in-out;
-}
-
-.flow-shape:nth-child(1) {
-  top: -10%;
-  left: -10%;
-  animation-delay: 0s;
-}
-
-.flow-shape:nth-child(2) {
-  bottom: -20%;
-  right: -10%;
-  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 60%);
-  animation-delay: -10s;
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate(5%, 10%) scale(1.1);
-  }
-}
-
-/* Typography */
-p {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  position: relative;
-  z-index: 2;
-}
-
-/* Glass Card with Logo Background */
-.glass-card {
-  /* Remove basic glass background */
-  background: transparent;
-  backdrop-filter: blur(0px);
-  /* Disable default blur to handle custom overlay */
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: 4rem 2rem;
-  max-width: 800px;
-  width: 90%;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Background Texture (Logo) */
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/assets/logo_new.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.15;
-  /* Subtle watermark layout */
-  z-index: 0;
-}
-
-/* Dark Overlay for readability */
-.glass-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(5, 10, 20, 0.7) 0%, rgba(5, 10, 20, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  /* Apply blur here */
-  z-index: 0;
-}
-
-.glass-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Buttons & Links relative position for z-indexing */
-.social-links {
-  display: flex;
-  gap: 2rem;
-  margin-top: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-.social-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.social-icon:hover {
-  background: var(--accent-primary);
-  color: #000;
-  box-shadow: 0 0 20px var(--accent-primary);
-  transform: scale(1.15);
-  border-color: transparent;
-}
-
-/* Animations */
-.fade-in-up {
-  animation: fadeInUp 1s ease-out forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.delay-1 {
-  animation-delay: 0.2s;
-}
-
-.delay-2 {
-  animation-delay: 0.4s;
-}
-
-.delay-3 {
-  animation-delay: 0.6s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .glass-card {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .social-links {
-    gap: 1.25rem;
-  }
-
-  .social-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  .glass-card::before {
-    background-size: contain;
-    /* Better for mobile */
-    opacity: 0.2;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;
 }
