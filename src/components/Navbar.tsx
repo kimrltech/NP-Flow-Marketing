@@ -19,9 +19,10 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
-        { name: "Services", href: "#services" },
-        { name: "About", href: "#about" },
-        { name: "Contact", href: "#contact" },
+        { name: "Home", href: "/" },
+        { name: "About", href: "/about" },
+        { name: "Services", href: "/services" },
+        { name: "Contact", href: "/contact" },
     ];
 
     return (
@@ -53,7 +54,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <Link
-                        href="#contact"
+                        href="/contact"
                         className="px-6 py-2 bg-gradient-to-r from-brand-teal to-brand-blue rounded-full text-white font-bold hover:shadow-[0_0_20px_rgba(0,210,255,0.5)] transition-all transform hover:scale-105"
                     >
                         Get Started
@@ -90,7 +91,7 @@ export default function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href="#contact"
+                                href="/contact"
                                 className="text-center px-6 py-3 bg-gradient-to-r from-brand-teal to-brand-blue rounded-full text-white font-bold"
                                 onClick={() => setIsOpen(false)}
                             >

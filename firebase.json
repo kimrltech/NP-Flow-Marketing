@@ -2,6 +2,8 @@
     "hosting": {
         "site": "npflowmarketing",
         "public": "out",
+        "cleanUrls": true,
+        "trailingSlash": false,
         "ignore": [
             "firebase.json",
             "**/.*",
