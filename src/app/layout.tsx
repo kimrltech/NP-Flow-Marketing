@@ -13,8 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NP Flow Marketing - Coming Soon",
-  description: "World class marketing solutions.",
+  title: "NP Flow Marketing | Data-Driven Growth & Strategy",
+  description:
+    "Elevate your brand with NP Flow Marketing. We deliver data-driven digital strategy, performance marketing, SEO, and growth consulting that drives measurable results.",
+  icons: {
+    icon: "/assets/logo_new.jpg",
+    apple: "/assets/logo_new.jpg",
+  },
 };
 
 export default function RootLayout({
